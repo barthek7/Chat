@@ -4,6 +4,12 @@ const OptimizeJsPlugin = require('optimize-js-plugin');
 
 module.exports = (env) => {
     const environment = env || 'production'
+
+    const plugins = [new HtmlWebpackPlugin({
+        template: 'client/index.html',
+        filename: 'index.html',
+        inject: 'body'
+    })]
     
     return {
         mode: environment,
@@ -35,11 +41,7 @@ module.exports = (env) => {
                 }
             ]
         },
-        plugins: [new HtmlWebpackPlugin({
-            template: './client/index.html',
-            filename: 'index.html',
-            inject: 'body'
-        })],
+        plugins: plugins,
         devServer: {
             proxy: {
                 '/socket.io': {
